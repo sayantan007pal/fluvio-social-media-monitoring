@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-commerce Order Processing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>E-commerce Order Processing Pipeline</h1>
+    <div class="container">
+        <div class="service">
+            <h2>Order Service</h2>
+            <p>Processes orders and publishes to Fluvio</p>
+            <button onclick="processOrder()">Process Order</button>
+        </div>
+        <div class="service">
+            <h2>Inventory Service</h2>
+            <p>Updates inventory based on orders</p>
+        </div>
+        <div class="service">
+            <h2>Invoice Service</h2>
+            <p>Generates invoices for processed orders</p>
+        </div>
+        <div class="service">
+            <h2>Notification Service</h2>
+            <p>Sends notifications to customers</p>
+        </div>
+    </div>
+
+    <script>
+        function processOrder() {
+            fetch('/process_order', {
+                method: 'POST'
+            })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+        }
+    </script>
+</body>
+</html>
