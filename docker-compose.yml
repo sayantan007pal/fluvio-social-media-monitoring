@@ -1,0 +1,30 @@
+
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - fluvio-producer
+      - fluvio-consumer
+
+  fluvio-consumer:
+    build:
+      context: ./fluvio-consumer
+      dockerfile: Dockerfile
+  fluvio-producer:
+    volumes:
+      - ./fluvio-config:/path/to/config
+    build:
+      context: ./fluvio-producer
+      dockerfile: Dockerfile
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    ports:
+      - "3000:3000"

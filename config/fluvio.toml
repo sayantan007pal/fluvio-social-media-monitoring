@@ -1,0 +1,3 @@
+[global]
+# Example settings
+endpoint = "localhost:8080"
